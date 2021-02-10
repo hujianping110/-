@@ -1,28 +1,27 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <Heater></Heater>
+    <router-view></router-view>
+    <Footer v-if="!$route.meta.isshow"></Footer>
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+// 引入axios
+/* import { reqListContainer } from './api' */
+// 引入Heater
+import Heater from './components/Header'
+// 引入Footer
+import Footer from './components/Footer'
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Heater,
+    Footer,
+  },
+  // 页面加载后发送axios请求获取数据
+  mounted() {
+    this.$store.dispatch('getbaseCategoryList')
+  },
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style scoped></style>
